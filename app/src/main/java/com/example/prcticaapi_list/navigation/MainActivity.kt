@@ -34,6 +34,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.prcticaapi_list.model.Characters
 import com.example.prcticaapi_list.model.Data
 import com.example.prcticaapi_list.ui.theme.PràcticaAPI_LISTTheme
+import com.example.prcticaapi_list.view.DetailScreen
 import com.example.prcticaapi_list.view.LaunchScreen
 import com.example.prcticaapi_list.view.ListScreen
 import com.example.prcticaapi_list.viewModel.APIViewModel
@@ -56,6 +57,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(Routes.Pantalla1.route) { LaunchScreen(navigationController) }
                         composable(Routes.Pantalla2.route) { ListScreen(navigationController) }
+                        composable(Routes.Pantalla3.route) { DetailScreen(navigationController)}
 
                 }
             }
