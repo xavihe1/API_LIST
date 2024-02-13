@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -57,62 +58,11 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable(Routes.Pantalla1.route) { LaunchScreen(navigationController) }
                         composable(Routes.Pantalla2.route) { ListScreen(navigationController) }
-                        composable(Routes.Pantalla3.route) { DetailScreen(navigationController)}
+                        composable(Routes.Pantalla3.route) { DetailScreen(navigationController) }
 
+                    }
                 }
             }
         }
     }
 }
-
-
-@Composable
-fun MyRecyclerView (myViewModel: APIViewModel) {
-    val showLoading: Boolean by myViewModel.loading.observeAsState(true)
-    val characters: Data by myViewModel.characters.observeAsState(Data(emptyList(), 0))
-    myViewModel.getCharacters()
-
-    if (showLoading) {
-        CircularProgressIndicator(
-            modifier = Modifier.width(50.dp),
-            color = MaterialTheme.colorScheme.secondary
-        )
-    } else {
-        LazyColumn() {
-            items(characters.data) {
-                CharacterItem(character = it)
-            }
-        }
-    }
-}
-
-
-@OptIn(ExperimentalGlideComposeApi::class)
-@Composable
-fun CharacterItem (character: Characters) {
-    Card(
-        border = BorderStroke(2.dp, Color.LightGray),
-        shape = RoundedCornerShape(8.dp),
-        modifier = Modifier.padding(8.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
-        ) {
-            GlideImage(
-                model = character.displayIcon,
-                contentDescription = "Character Image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.size(100.dp)
-                )
-            Text(
-                text = character.displayName,
-                style = MaterialTheme.typography.bodyLarge,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-    }
-}
-
