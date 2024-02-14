@@ -6,5 +6,4 @@ data class Characters(
     val displayIcon: String,
     val displayName: String,
     val role: Role,
-    val uuid: String,
 )
