@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -23,11 +24,14 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -36,15 +40,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.prcticaapi_list.model.Ability
 import com.example.prcticaapi_list.model.Characters
 import com.example.prcticaapi_list.model.Data
 import com.example.prcticaapi_list.model.Role
+import com.example.prcticaapi_list.navigation.BottomNavigationScreens
 import com.example.prcticaapi_list.navigation.Routes
 import com.example.prcticaapi_list.viewModel.APIViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListScreen(navController: NavController) {
     fun getCharactersList(): List<Characters> {
@@ -82,6 +90,25 @@ fun ListScreen(navController: NavController) {
             }
         }
     }
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+      var bottomNavigationItems = listOf(
+          BottomNavigationScreens.Home,
+          BottomNavigationScreens.Favorite
+      )
+
+      Scaffold( bottomBar = { BottomBar(navigationController, bottomNavigationItems) }) { paddingValues ->
+          Box(
+              modifier = Modifier
+                  .fillMaxSize()
+                  .padding(paddingValues)
+          ) {
+
+          }
+      }
+    }
 }
 
 @OptIn(ExperimentalGlideComposeApi::class)
@@ -114,19 +141,26 @@ fun CharacterItem(character: Characters, onItemSelected: (String) -> Unit) {
 
 
 @Composable
-fun BottomBar() {
-    BottomNavigation(backgroundColor = Color.Red, contentColor = Color.White) {
-        BottomNavigationItem(
-            icon = { Icon(Icons.Filled.Home, contentDescription = "Home") },
-            label = { Text(text = "Home") },
-            selected = true,
-            onClick = {  }
-        )
-        BottomNavigationItem(
-            icon = { Icon(Icons.Filled.Favorite, contentDescription = "Favorite") },
-            label = { Text(text = "Favorite") },
-            selected = false,
-            onClick = {  }
-        )
+fun BottomBar(
+    navigationController: NavHostController, bottomNavigationItems: List<BottomNavigationScreens>
+) {
+    BottomNavigation(backgroundColor = Color.Red) {
+        val navBackStackEntry by navigationController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
+        bottomNavigationItems.forEach { item ->
+            BottomNavigationItem(
+                icon = { Icon(item.icon, contentDescription = item.label) },
+                label = { Text(text = item.label) },
+                selected = currentRoute == item.route,
+                selectedContentColor = Color.White,
+                unselectedContentColor = Color.Black,
+                alwaysShowLabel = false,
+                onClick = {
+                    if (currentRoute != item.route) {
+                        navigationController.navigate(item.route)
+                    }
+                }
+            )
+        }
     }
 }

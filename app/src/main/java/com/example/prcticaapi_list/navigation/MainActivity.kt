@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.prcticaapi_list.ui.theme.PràcticaAPI_LISTTheme
 import com.example.prcticaapi_list.view.DetailScreen
+import com.example.prcticaapi_list.view.FavoriteScreen
 import com.example.prcticaapi_list.view.LaunchScreen
 import com.example.prcticaapi_list.view.ListScreen
 import com.example.prcticaapi_list.viewModel.APIViewModel
@@ -44,6 +45,7 @@ class MainActivity : ComponentActivity() {
                             val displayName = backStackEntry.arguments?.getString("displayName") ?: ""
                             DetailScreen(navigationController, displayName)
                         }
+                        composable(Routes.Pantalla4.route) { FavoriteScreen(navigationController) }
                     }
                 }
             }
