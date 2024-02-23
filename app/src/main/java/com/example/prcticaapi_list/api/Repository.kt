@@ -1,7 +1,7 @@
 package com.example.prcticaapi_list.api
 
 import com.example.prcticaapi_list.model.Character
-import com.example.prcticaapi_list.model.CharacterApplication
+import com.example.prcticaapi_list.database.CharacterApplication
 
 class Repository {
     val apiInterface = APIInterface.create()

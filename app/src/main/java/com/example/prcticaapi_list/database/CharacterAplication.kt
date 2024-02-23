@@ -1,4 +1,4 @@
-package com.example.prcticaapi_list.model
+package com.example.prcticaapi_list.database
 
 import android.app.Application
 import androidx.room.Room

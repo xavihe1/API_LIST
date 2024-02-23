@@ -1,7 +1,8 @@
-package com.example.prcticaapi_list.model
+package com.example.prcticaapi_list.database
 
 import androidx.room.Delete
 import androidx.room.Insert
+import com.example.prcticaapi_list.model.Character
 import retrofit2.http.Query
 
 interface CharacterDao {

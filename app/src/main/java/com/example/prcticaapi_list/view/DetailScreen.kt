@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.TextUnit
 import androidx.navigation.NavController
@@ -18,7 +19,7 @@ fun DetailScreen(navController: NavController, displayName: String) {
     val character = getCharactersList().find { it.displayName == displayName }
     if (character != null) {
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Image(painter = , contentDescription = "")
+            Image(painter = painterResource(id = character.displayIcon), contentDescription = "")
             Text(text = "Heading", modifier = Modifier)
             Text(text = "Description")
         }
@@ -27,7 +28,7 @@ fun DetailScreen(navController: NavController, displayName: String) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-    Image(painter = , contentDescription = "")
+    Image(painter = painterResource(id = character.displayIcon), contentDescription = "")
     
     Text(text = "HEADING", fontSize = TextUnit.Unspecified, fontStyle = FontStyle.Normal)
     
