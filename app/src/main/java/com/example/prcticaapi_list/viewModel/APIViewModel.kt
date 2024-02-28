@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.w3c.dom.Text
 
 class APIViewModel: ViewModel() {
     private val repository = Repository()
@@ -22,6 +23,8 @@ class APIViewModel: ViewModel() {
     val favorites = _favorites
     private val _characters = MutableLiveData<Data>()
     val characters = _characters
+    private val _searchText = MutableLiveData<Text>()
+    val searchText = _searchText
 
     fun getCharacters() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -66,5 +69,11 @@ class APIViewModel: ViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             repository.deleteFavorite(character)
         }
+    }
+
+
+
+    fun onSearchTextChange(text: String) {
+
     }
 }

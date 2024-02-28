@@ -13,4 +13,5 @@ class Repository {
     suspend fun deleteFavorite(character: Character) = daoInterfase.deleteCharacter(character)
     suspend fun isFavorite(character: Character) = daoInterfase.getCharacterById(character.id).isNotEmpty()
     suspend fun getFavorites() = daoInterfase.getAllCharacters()
+
 }
