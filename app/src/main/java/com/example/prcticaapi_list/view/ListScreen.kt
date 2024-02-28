@@ -30,7 +30,7 @@ import com.example.prcticaapi_list.navigation.BottomNavigationScreens
 import com.example.prcticaapi_list.viewModel.APIViewModel
 
 @Composable
-fun ListScreen(navController: NavController) {
+fun ListScreen(navController: NavHostController) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -41,7 +41,7 @@ fun ListScreen(navController: NavController) {
           BottomNavigationScreens.Favorite
       )
 
-      Scaffold( bottomBar = { BottomBar(navigationController, bottomNavigationItems) }) { paddingValues ->
+      Scaffold(bottomBar = { BottomBar(navigationController = navController, bottomNavigationItems) }) { paddingValues ->
           Box(
               modifier = Modifier
                   .fillMaxSize()
@@ -55,7 +55,8 @@ fun ListScreen(navController: NavController) {
 
 @Composable
 fun BottomBar(
-    navigationController: NavHostController, bottomNavigationItems: List<BottomNavigationScreens>
+    navigationController: NavHostController,
+    bottomNavigationItems: List<BottomNavigationScreens>
 ) {
     BottomNavigation(backgroundColor = Color.Red) {
         val navBackStackEntry by navigationController.currentBackStackEntryAsState()
