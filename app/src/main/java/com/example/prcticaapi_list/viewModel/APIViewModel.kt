@@ -21,10 +21,12 @@ class APIViewModel: ViewModel() {
     val isFavorite = _isFavorite
     private val _favorites = MutableLiveData<MutableList<Character>>()
     val favorites = _favorites
-    private val _characters = MutableLiveData<Data>()
+    private val _characters = MutableLiveData<List<Data>>()
     val characters = _characters
-    private val _searchText = MutableLiveData<Text>()
+    private val _searchText = MutableLiveData<String>()
     val searchText = _searchText
+    private val _status = MutableLiveData(false)
+    val status = _status
 
     fun getCharacters() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -75,5 +77,9 @@ class APIViewModel: ViewModel() {
 
     fun onSearchTextChange(text: String) {
 
+    }
+
+    fun setStatus(value: Boolean) {
+        _status.value = value
     }
 }

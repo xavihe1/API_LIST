@@ -1,5 +1,6 @@
 package com.example.prcticaapi_list.api
 
+import com.example.prcticaapi_list.model.Ability
 import com.example.prcticaapi_list.model.Data
 import okhttp3.OkHttpClient
 import retrofit2.Response
@@ -11,8 +12,14 @@ import retrofit2.http.Path
 
 interface APIInterface {
 
+    @GET("characters")
+    suspend fun getCharacters(): Response<List<Data>>
+
     @GET("characters/{id}")
-    suspend fun getCharacters(@Path("id") characterName: String): Response<Data>
+    suspend fun getSpecificCharacter(@Path("id") idCharacter: String): Response<Data>
+
+    @GET("ability")
+    suspend fun getAbility(@Path("id") idAbility: String): Response<Ability>
 
     companion object {
         val BASE_URL = "https://valorant-api.com/"

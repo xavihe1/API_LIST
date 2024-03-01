@@ -4,9 +4,13 @@ import com.example.prcticaapi_list.model.Character
 import com.example.prcticaapi_list.database.CharacterApplication
 
 class Repository {
-    val apiInterface = APIInterface.create()
+    private val apiInterface = APIInterface.create()
     val daoInterfase = CharacterApplication.database.characterDao()
-    suspend fun getAllCharacters() = apiInterface.getCharacters("")
+
+    //API
+    suspend fun getAllCharacters() = apiInterface.getCharacters()
+    suspend fun getAbility() = apiInterface.getAbility("")
+    suspend fun getSpecificCharacter() = apiInterface.getSpecificCharacter("")
 
     //Database functions
     suspend fun saveAsFavorite(character: Character) = daoInterfase.addCharacter(character)

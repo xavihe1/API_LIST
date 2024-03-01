@@ -9,11 +9,13 @@ class CharacterApplication: Application() {
     }
     override fun onCreate() {
         super.onCreate()
-        database = Room.databaseBuilder(this,
+        database =
+            Room.databaseBuilder(this,
             CharacterDatabase::class.java,
             "CharacterDatabase").build()
     }
 }
+
 
 
 

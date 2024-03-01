@@ -4,8 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "CharacterEntity", foreignKeys = @ForeignKey(entity = Character.class, parentColumns = "id",
-    childColumns = "displayName", onDelete = ForeignKey.CASCADE))
+@Entity(tableName = "CharacterEntity")
 data class Character(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val abilities: List<Ability>,
